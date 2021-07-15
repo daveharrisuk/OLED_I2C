@@ -25,7 +25,7 @@
 
 
 
-uint8_t I2C_ErrorCode;
+uint8_t I2C_ErrorFlag; /* set true on error. Caller must set false */
 
 
 /*----------------------------------------------------------------------------
@@ -84,7 +84,7 @@ void i2c_start( uint8_t i2c_addr )
 		timeout--;
 		if( timeout == 0 )
 		{
-			I2C_ErrorCode |= ( 1 << I2C_START );
+			I2C_ErrorFlag = 1;
 			return;
 		}
 	};
@@ -97,7 +97,7 @@ void i2c_start( uint8_t i2c_addr )
 	  timeout--;
 	  if( timeout == 0 )
 	  {
-		  I2C_ErrorCode |= ( 1 << I2C_SENDADRESS );
+		  I2C_ErrorFlag = 1;
 		  return;
 	  }
 	}
@@ -145,7 +145,7 @@ void i2c_byte( uint8_t byt )
 		timeout--;
 		if( timeout == 0 )
 		{
-			I2C_ErrorCode |= ( 1 << I2C_BYTE );
+			I2C_ErrorFlag = 1;
 			return;
 		}
 	}
@@ -175,7 +175,7 @@ uint8_t i2c_readAck()
 		timeout--;
 		if( timeout == 0 )
 		{
-			I2C_ErrorCode |= ( 1 << I2C_READACK );
+			I2C_ErrorFlag = 1;
 			return 0;
 		}
 	};
@@ -206,7 +206,7 @@ uint8_t i2c_readNAck()
 		timeout--;
 		if( timeout == 0 )
 		{
-			I2C_ErrorCode |= ( 1 << I2C_READNACK );
+			I2C_ErrorFlag = 1;
       return 0;
 		}
 	};

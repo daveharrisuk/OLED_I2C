@@ -22,14 +22,8 @@ extern "C" {
 #include <stdio.h>
 #include <avr/io.h>
 
-extern uint8_t I2C_ErrorCode;	// variable for I2C communication error
 
-									            // define bits in I2C-ErrorCode:
-#define I2C_START		    0			// timeout start-condition
-#define I2C_SENDADRESS	1			// timeout device-adress
-#define I2C_BYTE		    2			// timeout byte-transmission
-#define I2C_READACK		  3			// timeout read acknowledge
-#define I2C_READNACK	  4			// timeout read nacknowledge
+extern uint8_t I2C_ErrorFlag;	/* is true on error. Caller must set false */
 
 
 void    i2c_init();				              // init hw-i2c
